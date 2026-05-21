@@ -10,7 +10,7 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <vaadin.version>25.1.1</vaadin.version>
-        <swing-bridge.version>1.1.1</swing-bridge.version>
+        <swing-bridge.version>1.1.2</swing-bridge.version>
         <swing-bridge.path>${settings.localRepository}/com/vaadin</swing-bridge.path>
     </properties>
     
