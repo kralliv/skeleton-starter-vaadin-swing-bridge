@@ -2,7 +2,7 @@ package com.example.swingbridge.ui;
 
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.router.Route;
-import com.vaadin.modernization.swing.bridge.component.SwingBridge;
+import com.vaadin.swingbridge.SwingBridge;
 
 @Route(value = "")
 public class WarehouseView extends VerticalLayout {

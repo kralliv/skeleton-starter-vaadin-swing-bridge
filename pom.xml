@@ -10,7 +10,7 @@
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <vaadin.version>25.1.1</vaadin.version>
-        <swing-bridge.version>1.1.2</swing-bridge.version>
+        <swing-bridge.version>1.2.0</swing-bridge.version>
         <swing-bridge.path>${settings.localRepository}/com/vaadin</swing-bridge.path>
     </properties>
     
@@ -119,6 +119,7 @@
                         --add-opens=java.desktop/java.awt.event=ALL-UNNAMED
                         --add-opens=java.desktop/sun.awt=ALL-UNNAMED
                         --add-opens=java.desktop/java.awt.dnd=ALL-UNNAMED
+                        --add-opens=java.base/java.lang=ALL-UNNAMED
                         -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005
                     </jvmArguments>
 
