@@ -6,7 +6,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.PasswordField
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
-import com.vaadin.swingbridge.SwingBridge
 import com.vaadin.swingbridge.internal.runtime.SwingBridgeRunner
 import de.bewotec.launcher.DistributionService
 import de.bewotec.launcher.LoginService
@@ -56,16 +55,21 @@ class MyjackView(
                     targetAgency,
                 )
 
-                val (mainClass, arguments, classpath) = distributionService.prepare(
+                val executable = distributionService.prepare(
                     distribution,
                     url,
                     token
                 )
 
                 remove(container)
-                add(SwingBridge(mainClass, arguments) {
-                    SwingBridgeRunner.createClassLoader(classpath, Thread.currentThread().contextClassLoader)
-                })
+                add(
+                    LaunchableSwingBridge(executable.mainClass, executable.arguments) {
+                        SwingBridgeRunner.createClassLoader(
+                            executable.classpath,
+                            Thread.currentThread().contextClassLoader
+                        )
+                    }
+                )
             } catch (e: Exception) {
                 LOG.error("failed to launch", e)
                 errorLabel.text = "Launch failed, check logs"

@@ -93,6 +93,12 @@
         </dependency>
 
         <dependency>
+            <groupId>org.jetbrains.kotlinx</groupId>
+            <artifactId>kotlinx-coroutines-swing</artifactId>
+            <version>1.11.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>de.bewotec</groupId>
             <artifactId>distribution-manifest</artifactId>
             <version>1.1.1</version>
