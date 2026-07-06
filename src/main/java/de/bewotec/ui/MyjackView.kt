@@ -6,7 +6,6 @@ import com.vaadin.flow.component.orderedlayout.VerticalLayout
 import com.vaadin.flow.component.textfield.PasswordField
 import com.vaadin.flow.component.textfield.TextField
 import com.vaadin.flow.router.Route
-import com.vaadin.swingbridge.internal.runtime.SwingBridgeRunner
 import de.bewotec.launcher.DistributionService
 import de.bewotec.launcher.LoginService
 import org.slf4j.LoggerFactory
@@ -22,6 +21,8 @@ class MyjackView(
     private val targetAgency: Long,
 ) : VerticalLayout() {
     init {
+        isPadding = false
+
         val container = VerticalLayout()
 
         val usernameField = TextField("Username")
@@ -55,7 +56,7 @@ class MyjackView(
                     targetAgency,
                 )
 
-                val executable = distributionService.prepare(
+                val (mainClass, arguments, classpath) = distributionService.prepare(
                     distribution,
                     url,
                     token
@@ -63,9 +64,9 @@ class MyjackView(
 
                 remove(container)
                 add(
-                    LaunchableSwingBridge(executable.mainClass, executable.arguments) {
-                        SwingBridgeRunner.createClassLoader(
-                            executable.classpath,
+                    LaunchableSwingBridge(mainClass, arguments) {
+                        IsolatingURLClassLoader(
+                            classpath.map { it.toUri().toURL() }.toTypedArray(),
                             Thread.currentThread().contextClassLoader
                         )
                     }
